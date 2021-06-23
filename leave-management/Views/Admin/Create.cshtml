@@ -1,0 +1,99 @@
+﻿@model leave_management.Data.LeaveRequest
+
+@{
+    ViewData["Title"] = "Create";
+}
+
+
+<form method="post" asp-action="CreateLeave">
+    <div class="border p-3 bg-white">
+        <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+        <div class="form-group">
+            <h2 class="text-info pl-3">Create Leave For @ViewBag.userName</h2>
+        </div>
+        <input type="hidden" asp-for="ApplicationUserId" value="@ViewBag.id" />
+        <div class="row">
+            <div class="col-8">
+                <div class="form-group row py-2">
+                    <div class="col-4">
+                        <label asp-for="Name"></label>
+                    </div>
+                    <div class="col-8">
+                        <input asp-for="Name" class="form-control" />
+                        <span asp-validation-for="Name" class="text-danger"></span>
+                    </div>
+                </div>
+                <div class="form-group row py-2">
+                    <div class="col-4">
+                        <label asp-for="StartDate"></label>
+                    </div>
+                    <div class="col-8">
+                        <input asp-for="StartDate" class="form-control" />
+                        <span asp-validation-for="StartDate" class="text-danger"></span>
+                    </div>
+                </div>
+
+                <div class="form-group row py-2">
+                    <div class="col-4">
+                        <label asp-for="EndDate"></label>
+                    </div>
+                    <div class="col-8">
+                        <input asp-for="EndDate" class="form-control" />
+                        <span asp-validation-for="EndDate" class="text-danger"></span>
+                    </div>
+                </div>
+
+                <div class="form-group row py-2">
+                    <div class="col-4">
+                        <label asp-for="ApprovedByManager"></label>
+                    </div>
+                    <div class="col-8">
+                        <input type="checkbox" asp-for="ApprovedByManager" class="form-control" />
+                        <span asp-validation-for="ApprovedByManager" class="text-danger"></span>
+                    </div>
+                </div>
+
+                <div class="form-group row py-2">
+                    <div class="col-4">
+                        <label asp-for="ApprovedByAdmin"></label>
+                    </div>
+                    <div class="col-8">
+                        <input type="checkbox" asp-for="ApprovedByAdmin" class="form-control" />
+                        <span asp-validation-for="ApprovedByAdmin" class="text-danger"></span>
+                    </div>
+                </div>
+
+                <div class="form-group row py-2">
+                    <div class="col-4">
+                        <label asp-for="Cancelled"></label>
+                    </div>
+                    <div class="col-8">
+                        <input type="checkbox" asp-for="Cancelled" class="form-control" />
+                        <span asp-validation-for="Cancelled" class="text-danger"></span>
+                    </div>
+                </div>
+
+                <div class="form-group row">
+                    <div class="col-8 offset-4 row">
+
+                        <div class="col">
+                            <input type="submit" class="btn btn-info w-100" value="Create" />
+                        </div>
+                        <div class="col">
+                            <a asp-action="Index" class="btn btn-success w-100">
+                                <i class="fas fa-sign-out-alt"></i> Back
+                            </a>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </div>
+</form>
+
+
+@section Scripts {
+    <partial name="_ValidationScriptsPartial" />
+}
+

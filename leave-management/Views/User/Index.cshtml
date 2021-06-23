@@ -1,0 +1,120 @@
+﻿@model IEnumerable<leave_management.Data.LeaveRequest>
+@{
+    ViewData["Title"] = "Index";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<div class="container p-3 bg-white">
+    <div class="row pt-4">
+        <div class="col-6">
+            <h2 class="text-primary">My Leave List</h2>
+        </div>
+        <div class="col-6">
+            <a asp-action="Create" class="btn btn-primary">
+                <i class="fas fa-plus"></i> &nbsp; Create New Leave
+            </a>
+        </div>
+    </div>
+
+    <br /><br />
+
+    @if (Model.Count() > 0)
+    {
+        <table class="table table-bordered table-striped" style="width:100%">
+            <thead>
+                <tr>
+                    <th>
+                        Name
+                    </th>
+                    <th>
+                        Leave Start Date
+                    </th>
+                    <th>
+                        Approved By Admin ?
+                    </th>
+                    <th>
+                        Approved By Manager ?
+                    </th>
+                    <th>
+                        Cancelled
+                    </th>
+                    <th>
+                        Is Complete ?
+                    </th>
+                    <th>
+                    </th>
+
+                </tr>
+            </thead>
+            <tbody>
+                @foreach (var obj in Model)
+                {
+
+
+
+                    <tr>
+                        <td>@obj.Name</td>
+                        <td>@obj.StartDate</td>
+                        <td>
+                            @if (obj.ApprovedByAdmin)
+                            {
+                                <p style="color:green">Approved</p>
+                            }
+                            else
+                            {
+                                <p style="color:red">Not Approved</p>
+                            }
+                        </td>
+                        <td>
+                            @if (obj.ApprovedByManager)
+                            {
+                                <p style="color:green">Approved</p>
+                            }
+                            else
+                            {
+                                <p style="color:red">Not Approved</p>
+                            }
+                        </td>
+
+                        <td>
+                            @if (obj.Cancelled)
+                            {
+                                <p style="color:red">Cancelled</p>
+                            }
+                            else
+                            {
+                                <p style="color:green">Not Cancelled</p>
+                            }
+                        </td>
+                        <td>
+                            @if (obj.ApprovedByAdmin && obj.ApprovedByManager)
+                            {
+                                <p style="color:green">Completed</p>
+                            }
+                            else
+                            {
+                                <p style="color:red">Not Completed</p>
+                            }
+                        </td>
+                        <td>
+                            <a asp-action="Edit" asp-route-id="@obj.Id" class="btn btn-primary">
+                                <i class="fas fa-edit"></i> Edit
+                            </a>
+                            <a asp-action="Delete" asp-route-id="@obj.Id" class="btn btn-danger">
+                                <i class="far fa-trash-alt"></i> Delete
+                            </a>
+                        </td>
+                    </tr>
+                }
+            </tbody>
+        </table>
+    }
+    else
+    {
+        <p>No Leave Exists...</p>
+    }
+
+
+
+</div>
+
